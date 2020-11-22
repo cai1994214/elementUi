@@ -1,0 +1,16 @@
+.el-submenu .el-menu {
+    background-color: #000c1f;
+}
+.el-menu {
+    background-color: #0e1a31;
+    border:none;
+}
+.el-menu-item {
+    color:#fff;
+}
+.el-submenu__title {
+    color:#fff;
+}
+.el-submenu__title:focus, .el-submenu__title:hover {
+    background: -webkit-gradient(linear, left top, right top, from(rgba(17, 208, 226, 0.3)), to(transparent));
+}
