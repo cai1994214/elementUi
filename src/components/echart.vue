@@ -9,8 +9,8 @@
         range-separator="至">
         </el-date-picker>
       </div>
-      <div class="tab-group flex" style="margin-top:20px;">
-          <div v-for="item in tablist" class="page-box tab-item">
+      <div class="tab-group flex">
+          <div v-for="item in tablist" class="page-box tab-item" :key="item">
               <i class="fa" :class="item.i"></i>
               <span>{{item.name}}</span>
               <el-tooltip class="item" effect="dark"  placement="top">
@@ -304,49 +304,53 @@ export default {
   }
 }
 </script>
-<style scoped>
+<style scoped lang="scss">
     .flex-l{
         display: flex;
         justify-content: left;
         align-items: center;
+    }
+    .tab-group{
+        margin-top:20px;
+         .tab-item{
+            flex: 1;
+            margin-right: 10px;
+            height: 150px;
+        }
+        .tab-item:nth-of-type(4){
+            margin: 0;
+        }
+        .tab-item i:nth-of-type(1){
+            top: 35px;
+            position: absolute;
+            font-size: 32px;
+            left: 35px;
+        }
+        .tab-item i:nth-of-type(2){
+            top: 43px;
+            position: absolute;
+            right: 45px;
+            color: #ccc;
+        }
+        .tab-item span:nth-of-type(1){
+            position: absolute;
+            top: 38px;
+            right: 65px;
+            font-size: 20px;
+        }
+        .tab-item span:nth-of-type(2){
+            position: absolute;
+            right: 110px;
+            bottom: 20px;
+            font-size: 25px;
+        }
     }
     .date-Input{
         color: #00e8fe !important;
         background: transparent !important;
         border:0;
     }
-    .tab-item{
-        flex: 1;
-        margin-right: 10px;
-        height: 150px;
-    }
-    .tab-item:nth-of-type(4){
-        margin: 0;
-    }
-    .tab-item i:nth-of-type(1){
-        top: 35px;
-        position: absolute;
-        font-size: 32px;
-        left: 35px;
-    }
-    .tab-item i:nth-of-type(2){
-        top: 43px;
-        position: absolute;
-        right: 45px;
-        color: #ccc;
-    }
-    .tab-item span:nth-of-type(1){
-        position: absolute;
-        top: 38px;
-        right: 65px;
-        font-size: 20px;
-    }
-    .tab-item span:nth-of-type(2){
-        position: absolute;
-        right: 110px;
-        bottom: 20px;
-        font-size: 25px;
-    }
+   
     .ec-group{
         margin-top: 20px;
     }

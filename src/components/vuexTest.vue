@@ -5,7 +5,7 @@
     <count :lastChild="isCollapse" :child-say='listenToMyBoy'></count>
     <p>这是子页面向父页面传的值{{childWords}}</p>
     <ul>
-      <li v-for="item in listData">{{item}}</li>
+      <li v-for="item in listData" :key="item">{{item}}</li>
     </ul>
     <button @click="changeList">改变</button>
   </div>
