@@ -7,6 +7,7 @@
               .el-fade-in-linear
             </div>
         </transition>
+        <!-- 注释 -->
         <transition name="el-fade-in">
             <div v-show="show" class="transition-box">
               .el-fade-in
