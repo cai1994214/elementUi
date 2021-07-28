@@ -14,6 +14,8 @@ import NotFoundComponent from '@/components/notFound'
 import Xtest from '@/components/vuexTest'
 import commParent from '@/components/parents'
 import NVuex from '@/components/Vuex'
+import TableTree from '@/components/tableTree1'
+import MousePage from '@/components/mousePage'
 // 懒加载方式，当路由被访问的时候才加载对应组件
 const Login = resolve => require(['@/components/Login'], resolve)
  
@@ -85,7 +87,17 @@ let router= new Router({
             path:'/screenData',
             name:"screenLink",
             component:screenData
-          }
+          },
+          {
+            path:'/tableTree',
+            name:"tableTreeLink",
+            component:TableTree
+          },
+          {
+            path:'/MousePage',
+            name:"MousePageLink",
+            component:MousePage
+          },
         ]
       },
       {

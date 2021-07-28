@@ -1,0 +1,5 @@
+export const Mixins = {
+    methods:{
+        
+    }
+} 

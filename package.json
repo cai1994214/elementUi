@@ -14,11 +14,12 @@
     "axios": "^0.18.0",
     "better-scroll": "^1.15.2",
     "echarts": "^4.2.1",
-    "element-ui": "^2.7.0",
+    "element-ui": "^2.14.1",
     "font-awesome": "^4.7.0",
     "less-loader": "^5.0.0",
     "node-sass": "^4.14.1",
     "vue": "^2.5.2",
+    "vue-property-decorator": "^9.1.2",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.1.1"

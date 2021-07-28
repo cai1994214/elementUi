@@ -34,7 +34,7 @@
             </div>
             <el-menu
             router 
-            default-active="表单" 
+            :default-active="activeIndex" 
             class="el-menu-vertical-demo"
             @select="pathName"
             :collapse="isCollapse"
@@ -67,6 +67,24 @@
                 <el-menu-item index="时间线" :route="{name: 'timeSelLink'}">时间线</el-menu-item>
                 <el-menu-item index="大屏" :route="{name: 'screenLink'}">大屏</el-menu-item>
             </el-submenu>
+              <el-submenu index="树形表格">
+                <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span slot="title">树形表格</span>
+                </template>
+                <el-menu-item index="树表格" :route="{name: 'tableTreeLink'}">
+                    树表格
+                </el-menu-item>
+            </el-submenu>
+             <el-submenu index="鼠标移动">
+                <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span slot="title">鼠标移动</span>
+                </template>
+                <el-menu-item index="demo" :route="{name: 'MousePageLink'}">
+                    demo
+                </el-menu-item>
+            </el-submenu>
             <el-menu-item :route="{name: 'login'}" index="/Login">
                 <template slot="title">
                     <i class="el-icon-setting"></i>
@@ -89,7 +107,8 @@ export default {
       return {
         mainPath:"导航一",
         vicePath:"表单",
-        isCollapse: false
+        isCollapse: false,
+        activeIndex:'表单'
       };
     },
     methods: {
@@ -109,13 +128,25 @@ export default {
         }
       },
       pathName(key,keyPath){
+          sessionStorage.setItem("mainPath", keyPath[0]); 
+          sessionStorage.setItem("vicePath", keyPath[1]); 
           this.mainPath=keyPath[0];
           this.vicePath=keyPath[1];
       }
     },
     mounted(){
-        this.$router.push({name:"formLink"});
-        console.log(this)
+        // console.log(this.pathName())
+    },
+    created(){
+        let mainPath = sessionStorage.getItem('mainPath');
+        let vicePath = sessionStorage.getItem('vicePath');
+        if(mainPath && vicePath){
+            this.mainPath = mainPath;
+            this.vicePath = vicePath;
+            this.activeIndex = vicePath
+        }else{
+             this.$router.push({name:"formLink"});
+        }
     }
 }
 

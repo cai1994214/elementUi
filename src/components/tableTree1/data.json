@@ -1,0 +1,32 @@
+[
+  {
+    "name":"成品",
+    "parentCode":"0",
+    "code":"1",
+    "level":"0",
+    "children":[
+      {
+        "name":"材料1",
+        "parentCode":"1",
+        "code":"1-1",
+        "level":"1",
+        "children":[
+          {
+            "name":"材料11",
+            "parentCode":"1-1",
+            "code":"1-1-1",
+            "level":"2",
+            "children":[]
+          }
+        ]
+      },
+      {
+        "name":"材料2",
+        "parentCode":"1",
+        "code":"1-2",
+        "level":"1",
+        "children":[]
+      }
+    ]
+  }
+]
