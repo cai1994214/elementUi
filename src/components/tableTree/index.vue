@@ -1,221 +1,211 @@
 <template>
-  <el-table :data="formatData" :row-style="showRow" v-bind="$attrs" row-key="id">
-    <el-table-column v-if="columns.length===0" width="150">
-      <template slot-scope="scope">
-        <span v-for="space in scope.row._level" class="ms-tree-space" :key="space"></span>
-        <span class="tree-ctrl" v-if="iconShow(0,scope.row)" @click="toggleExpanded(scope.$index)">
-          <i v-if="!scope.row._expanded" class="el-icon-plus"></i>
-          <i v-else class="el-icon-minus"></i>
-        </span>
-        {{scope.$index}}
-      </template>
-    </el-table-column>
-    <el-table-column v-else v-for="(column, index) in columns" :key="column.value" :label="column.text" :width="column.width">
-      <template slot-scope="scope">
-        <span v-if="index === 0" v-for="space in scope.row._level" class="ms-tree-space" :key="space"></span>
-        <span class="tree-ctrl" v-if="iconShow(index,scope.row)" @click="toggleExpanded(scope.$index)">
-          <i v-if="!scope.row._expanded" class="el-icon-plus"></i>
-          <i v-else class="el-icon-minus"></i>
-        </span>
-        {{scope.row[column.value]}}
-      </template>
-    </el-table-column>
-    <slot></slot>
+  <div class="menus-tree">
+  <div class="search">
+    <el-date-picker
+      class="datePicker"
+      v-model="dateTime"
+      type="daterange"
+      range-separator="至"
+      :picker-options="pickerOptions"
+      start-placeholder="开始日期"
+      end-placeholder="结束日期"
+    >
+    </el-date-picker>
+    <el-button @click="initData()" style="float: right"
+      >查询</el-button>
+  </div>
+  <el-table
+      :data="tableData"
+      row-key="code"
+      :header-cell-style="headerStyle"
+      :cell-style="cellStyle"
+      default-expand-all
+      class="table-striped el-table"
+      :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      max-height="350"
+    >
+        <template
+        v-for="(item,index) in tableColumn"
+        >
+          <!-- index是固定的字段个数 -->
+          <el-table-column
+          v-if="index<3"
+          fixed
+          :prop="item.props"
+          :key="index"
+          :width="item.width"
+          :label="item.label"
+          >
+        </el-table-column>
+        <el-table-column
+          v-else
+          :prop="item.props"
+          :key="index"
+          :min-width="item.width"
+          :label="item.label"
+          >
+        </el-table-column>
+        </template>
   </el-table>
+  </div>
 </template>
 
-<script >
-import treeToArray from './eval'
-export default {
-    name: 'treeTable',
-    data(){
-        return {
-            columns: [
-                {
-                text: '事件',
-                value: 'event',
-                width: 200
-                },
-                {
-                text: 'ID',
-                value: 'id'
-                },
-                {
-                text: '时间线',
-                value: 'timeLine'
-                },
-                {
-                text: '备注',
-                value: 'comment'
-                }
-            ],
-            data: [
-                    {
-                    id: 0,
-                    event: '事件1',
-                    timeLine: 50,
-                    comment: '无'
-                    },
-                    {
-                    id: 1,
-                    event: '事件1',
-                    timeLine: 100,
-                    comment: '无',
-                    children: [
-                        {
-                        id: 2,
-                        event: '事件2',
-                        timeLine: 10,
-                        comment: '无'
-                        },
-                        {
-                        id: 3,
-                        event: '事件3',
-                        timeLine: 90,
-                        comment: '无',
-                        children: [
-                            {
-                            id: 4,
-                            event: '事件4',
-                            timeLine: 5,
-                            comment: '无'
-                            },
-                            {
-                            id: 5,
-                            event: '事件5',
-                            timeLine: 10,
-                            comment: '无'
-                            },
-                            {
-                            id: 6,
-                            event: '事件6',
-                            timeLine: 75,
-                            comment: '无',
-                            children: [
-                                {
-                                id: 7,
-                                event: '事件7',
-                                timeLine: 50,
-                                comment: '无',
-                                children: [
-                                    {
-                                    id: 71,
-                                    event: '事件71',
-                                    timeLine: 25,
-                                    comment: 'xx'
-                                    },
-                                    {
-                                    id: 72,
-                                    event: '事件72',
-                                    timeLine: 5,
-                                    comment: 'xx'
-                                    },
-                                    {
-                                    id: 73,
-                                    event: '事件73',
-                                    timeLine: 20,
-                                    comment: 'xx'
-                                    }
-                                ]
-                                },
-                                {
-                                id: 8,
-                                event: '事件8',
-                                timeLine: 25,
-                                comment: '无'
-                                }
-                            ]
-                            }
-                        ]
-                        }
-                    ]
-                    }
-                ]
-
-        }
+<script>
+  import Vue from 'vue';
+  import './format.js'
+  import JSONDATA from "./data.json";
+  export default {
+    data() {
+      return {
+        lineStyle: {
+          "font-size": "14px",
+          height: "45px",
+          padding: "3px 0",
+        },
+        pickerOptions: {//限制当前时间
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          },
+        },
+        dateTime: [
+          new Date(new Date().getTime() - 30 * 24 * 60 * 60 * 1000),new Date(Date.now())
+        ],//当前时间和过去31天的
+        tableColumn:[],//表格列表
+        tableData:[],//表格数据
+      }
     },
-    props: {
-        evalFunc: Function,
-        evalArgs: Array,
-        expandAll: {
-            type: Boolean,
-            default: false
-        }
-    },
-    computed: {
-        // 格式化数据源
-        formatData: function() {
-            let tmp
-            if (!Array.isArray(this.data)) {
-                tmp = [this.data]
-            } else {
-                tmp = this.data
-            }
-            const func = this.evalFunc || treeToArray
-            const args = this.evalArgs ? Array.concat([tmp, this.expandAll], this.evalArgs) : [tmp, this.expandAll]
-            return func.apply(null, args)
-        }
+    created() {
+      this.initData();//初始化数据 实际项目咋请求之后操作
     },
     methods: {
-        showRow: function(row) {
-            const show = (row.row.parent ? (row.row.parent._expanded && row.row.parent._show) : true)
-            row.row._show = show
-            return show ? 'animation:treeTableShow 1s;-webkit-animation:treeTableShow 1s;' : 'display:none;'
-        },
-        // 切换下级是否展开
-        toggleExpanded: function(trIndex) {
-            const record = this.formatData[trIndex]
-            record._expanded = !record._expanded
-        },
-        // 图标显示
-        iconShow(index, record) {
-            return (index === 0 && record.children && record.children.length > 0)
+       headerStyle() {
+        return this.lineStyle;
+      },
+      cellStyle() {
+        return this.lineStyle;
+      },
+      initData(){
+        //这里时间格式化 可以用vue的moment插件 看你个人
+        let dateArr = this.getTimeArr(this.dateTime[0].Format('yyyy-MM-dd'),this.dateTime[1].Format('yyyy-MM-dd'),'yyyy-MM-dd',1);
+        //-------start:  这里模拟后台数据格式 -------
+        let newData = this.treeTransArray(JSONDATA,'children');
+        newData.map(item=>{
+          item.priceInfo = dateArr.map(ele=>{
+            return {date:ele,price:Math.random()*10+2}
+          });
+          return item
+        });
+        let treeData = this.arrayTransTree(newData,'code','parentCode','children');
+        //-------end:  这里模拟后台数据格式  treeData 是树形结构 newData是普通结构 ------
+        //这里我直接拿第一个数据遍历组出表格列表
+        let columnArr = [];
+        for(var k in treeData[0]){
+            switch(k){
+                case 'level':
+                    columnArr.push({props:k,label:'层级',width:120});
+                    break;
+                case 'code':
+                    columnArr.push({props:k,label:'编码',width:120});
+                    break;
+                case 'name':
+                    columnArr.push({props:k,label:'名称',width:120});
+                    break;
+                case 'priceInfo':
+                    treeData[0][k].forEach(item=>{
+                         columnArr.push({'props':item.date,'label':item.date.slice(5),width:100});
+                    });
+                    break;
+            }
         }
-    },
-    created(){
-        console.log('sss')
+        this.tableColumn = columnArr;
+        console.log('columnArr',columnArr)
+        //------start: 将时间字段为key 价格为vule的对象处理出来放在 普通对象的字段里 ------
+        //1:处理表格数据  把每项时间对应的价格 和其他需要展示的字段提出来
+        let tableData = newData.map((item)=>{
+          let arr = [],obj;
+          item.priceInfo.forEach((ele,j)=>{
+              obj = {};
+              obj.date = ele.date;
+              obj.price = ele.price;
+              obj.level = item.level;
+              obj.name = item.name;
+              obj.parentCode = item.parentCode;
+              obj.code = item.code;
+              obj.children = [];//这里子项 我没用到 直接赋值空
+              arr.push(obj)
+          })
+          return arr
+        });
+        console.log('tableData',tableData)
+        //2:通过对象合并 处理成想要的格式
+        let newtableData = tableData.map((item) => {
+          let obj2 = {},arr2 = [];
+          item.forEach((ele) => {
+              obj2.level = ele.level;
+              obj2.parentCode = ele.parentCode;
+              obj2.name = ele.name;
+              obj2.code = ele.code;
+              obj2.children = ele.children;
+              obj2[ele.date] = ele.price; //价格
+              arr2.push(obj2);
+          });
+          return Object.assign.apply({}, arr2);
+      });
+      //------end: 将时间字段为key 价格为vule的对象处理出来放在 普通对象的字段里 ------
+      console.log('newtableData',newtableData)
+
+      //再将普通json 转化成树形 往组件里一丢 完事
+      this.tableData = this.arrayTransTree(newtableData,'code','parentCode','children');
+      
+
+      },
+      getTimeArr(begin,end,type,interval){  //获取两个时间相邻的数组
+        var arr=[],beginDate,endDate,msCount;
+        beginDate=new Date(begin+" 00:00");
+        endDate=new Date(end+" 00:00");
+        msCount=interval*24*60*60*1000;  //1天 2天 3天
+        var beginMs=beginDate.getTime();
+        var endMs=endDate.getTime();
+        for(var i=beginMs;i<=endMs;i+=msCount){
+            arr.push(new Date(i).Format(type));
+        }
+        return arr;
+      },
+      treeTransArray(tree, key) {//树转普通
+        return tree.reduce(function a(con, item) {
+            con.push(item);
+            if (item[key] && item[key].length > 0)
+              item[key].reduce(a, con);
+            return con;
+          }, [])
+          .map(function (item) {
+            item[key] = [];
+            return item;
+          });
+      },
+      arrayTransTree(list,idstr,pidstr,children){ //普通转树
+          let result = [],temp = {};  
+          for(let i = 0; i < list.length; i++){  
+              temp[list[i][idstr]]=list[i];//将nodes数组转成对象类型  
+          }  
+          for(let j=0; j<list.length; j++){  
+              let tempVp = temp[list[j][pidstr]]; //获取每一个子对象的父对象  
+              if(tempVp){//判断父对象是否存在，如果不存在直接将对象放到第一层  
+                  if(!tempVp[children]) tempVp[children] = [];//如果父元素的nodes对象不存在，则创建数组  
+                  tempVp[children].push(list[j]);//将本对象压入父对象的nodes数组  
+              }else{  
+                  result.push(list[j]);//将不存在父对象的对象直接放入一级目录  
+              }  
+          }  
+          return result;  
+      },
+      
     }
-   
-}
+  }
 </script>
 
-<style rel="stylesheet/css">
-  @keyframes treeTableShow {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-  @-webkit-keyframes treeTableShow {
-    from {opacity: 0;}
-    to {opacity: 1;}
-  }
-</style>
-
-<style  rel="stylesheet/scss" scoped>
-  .ms-tree-space {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1;
-    width: 18px;
-    height: 14px;
-  }
-  .ms-tree-space ::before {
-      content: ""
-    }
-  .processContainer{
-    width: 100%;
-    height: 100%;
-  }
-  table td {
-    line-height: 26px;
-  }
-
-  .tree-ctrl{
-    position: relative;
-    cursor: pointer;
-    color: #2196F3;
-    margin-left: 18px;
-  }
+<style scoped>
+ .search{
+   margin-bottom: 20px;
+ }
 </style>

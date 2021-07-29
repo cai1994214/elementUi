@@ -1,6 +1,6 @@
 <template>
   <div>
-      <el-menu :default-active="activeIndex"
+    <el-menu :default-active="activeIndex"
       class="el-menu-demo"
       mode="horizontal"
       background-color="#545c64"
@@ -23,8 +23,8 @@
       </el-submenu>
       <el-menu-item index="3" >消息中心</el-menu-item>
       <el-menu-item index="4"><a href="" >订单管理</a></el-menu-item>
-      </el-menu>
-      <el-menu default-active="2" 
+        </el-menu>
+        <el-menu default-active="2" 
       class="el-menu-vertical-demo" 
       :collapse="isCollapse">
       <div class="fix">

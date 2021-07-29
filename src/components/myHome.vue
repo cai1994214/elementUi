@@ -39,53 +39,18 @@
             @select="pathName"
             :collapse="isCollapse"
             >
-            <el-submenu index="导航一">
+            <el-submenu v-for="(item, i) in menuList" :key="`${i}`" :index="`${i}`">
                 <template slot="title">
-                <i class="el-icon-location"></i>
-                <span slot="title">导航一</span>
+                    <i :class="item.iconClass"></i>
+                    <span slot="title">{{item.title}}</span>
                 </template>
-                <el-menu-item index="表单" :route="{name: 'formLink'}">表单</el-menu-item>
-                <el-menu-item index="menu" :route="{name: 'menuLink'}">menu</el-menu-item>
-                <el-menu-item index="vuex" :route="{name: 'vuexLink'}">vuex</el-menu-item>
-                <el-menu-item index="组件通信" :route="{name: 'commParentLink'}">组建通信</el-menu-item>
-                <el-menu-item index="新vuex" :route="{name: 'NVuexLink'}">新vuex</el-menu-item>
+                <el-menu-item  v-for="(child, j) in item.children" 
+                :key="`${i}-${j}`" 
+                :index="`${i}-${j}`"
+                :route="{name: child && child.path}"
+                >{{child.title}}</el-menu-item>
             </el-submenu>
-            <el-submenu index="导航二">
-                <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span slot="title">导航二</span>
-                </template>
-                <el-menu-item index="滑轮" :route="{name: 'scrollLink'}">滑轮</el-menu-item>
-                <el-menu-item index="轮播" :route="{name: 'wheelLink'}">轮播</el-menu-item>
-                <el-menu-item index="图表" :route="{name: 'echartLink'}">图表</el-menu-item>
-            </el-submenu>
-            <el-submenu index="导航三">
-                <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span slot="title">导航三</span>
-                </template>
-                <el-menu-item index="时间线" :route="{name: 'timeSelLink'}">时间线</el-menu-item>
-                <el-menu-item index="大屏" :route="{name: 'screenLink'}">大屏</el-menu-item>
-            </el-submenu>
-              <el-submenu index="树形表格">
-                <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span slot="title">树形表格</span>
-                </template>
-                <el-menu-item index="树表格" :route="{name: 'tableTreeLink'}">
-                    树表格
-                </el-menu-item>
-            </el-submenu>
-             <el-submenu index="鼠标移动">
-                <template slot="title">
-                <i class="el-icon-menu"></i>
-                <span slot="title">鼠标移动</span>
-                </template>
-                <el-menu-item index="demo" :route="{name: 'MousePageLink'}">
-                    demo
-                </el-menu-item>
-            </el-submenu>
-            <el-menu-item :route="{name: 'login'}" index="/Login">
+            <el-menu-item :route="{name: 'login'}" index="-1">
                 <template slot="title">
                     <i class="el-icon-setting"></i>
                     <span>退出</span>
@@ -94,7 +59,7 @@
             </el-menu>
           </el-aside>
            <section class="right-main">
-                <div class="path"><span>{{mainPath}}</span><span>/</span><span>{{vicePath}}</span></div>
+                <div class="path"><span>{{getMainPath}}</span><span>/</span><span>{{getVicePath}}</span></div>
                 <router-view  :isCollapse="isCollapse" style="margin-top:20px;height:calc(100% - 40px)"></router-view>
           </section>
       </el-container>
@@ -102,14 +67,31 @@
 </template>
 
 <script>
+import { menuList } from '@/api/menu.js'
 export default {
   data() {
       return {
-        mainPath:"导航一",
-        vicePath:"表单",
+        mainPath: '0',
+        vicePath: '0-0',
         isCollapse: false,
-        activeIndex:'表单'
+        activeIndex: '0',
+        menuList: menuList
       };
+    },
+    computed:{
+        getMainPath() {
+            if(!this.mainPath || this.mainPath == '-1'){
+                return
+            }
+            return menuList[this.mainPath*1].title || menuList[0].title
+        },
+        getVicePath() {
+            if(!this.vicePath || this.vicePath == "undefined"){
+                return
+            }
+            let viceArr = this.vicePath.split('-');
+            return menuList[viceArr[0]*1].children[viceArr[1]*1].title || menuList[0].children[0].title
+        }
     },
     methods: {
       collapse1: function (){
@@ -132,21 +114,24 @@ export default {
           sessionStorage.setItem("vicePath", keyPath[1]); 
           this.mainPath=keyPath[0];
           this.vicePath=keyPath[1];
+      },
+      getPath() {
+            let mainPath = sessionStorage.getItem('mainPath');
+            let vicePath = sessionStorage.getItem('vicePath');
+            if(mainPath && vicePath && mainPath!== "-1" && vicePath !== "undefined"){
+                this.mainPath = mainPath;
+                this.vicePath = vicePath;
+                this.activeIndex = vicePath
+            }else{
+                console.log(this.activeIndex,'activeIndex')
+                this.$router.push({name:"formLink"});
+            }
       }
     },
     mounted(){
-        // console.log(this.pathName())
     },
     created(){
-        let mainPath = sessionStorage.getItem('mainPath');
-        let vicePath = sessionStorage.getItem('vicePath');
-        if(mainPath && vicePath){
-            this.mainPath = mainPath;
-            this.vicePath = vicePath;
-            this.activeIndex = vicePath
-        }else{
-             this.$router.push({name:"formLink"});
-        }
+        this.getPath();
     }
 }
 
