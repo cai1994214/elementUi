@@ -1,19 +1,27 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/myHome'
-import tForm from '@/components//tform'
+
 import Ttable from '@/components/myTable'
-import Mmenu from '@/components/myMenu'
-// import Mdialog from '@/components/myDialog'
-import Wheel from '@/components/Wheel'
-import timeSel from '@/components/timeSel'
-import Tscroll from '@/components/scrollDemo/scrolltest'
-import Mechart from '@/components/echart'
-import screenData from '@/components/screenData'
+//vue相关
+import tForm from '@/components/vueRelated/vueForm'
+import Mmenu from '@/components/vueRelated/vueMenu'
+import Xtest from '@/components/vueRelated/vueVuex'
+import commParent from '@/components/vueRelated/vueCommunication'
+import NVuex from '@/components/vueRelated/newVuex'
+
+//图标相关
+import Tscroll from '@/components/chartRelated/scrollDemo/scrolltest'
+import Wheel from '@/components/chartRelated/wheel'
+import Mechart from '@/components/chartRelated/echart'
+import timeSel from '@/components/chartRelated/timeSel'
+import screenData from '@/components/chartRelated/screenData'
+
+
 import NotFoundComponent from '@/components/notFound'
-import Xtest from '@/components/vuexTest'
-import commParent from '@/components/parents'
-import NVuex from '@/components/Vuex'
+
+
+
 import TableTree from '@/components/tableTree'
 import MousePage from '@/components/mousePage'
 // 懒加载方式，当路由被访问的时候才加载对应组件

@@ -13,8 +13,7 @@
               <p>{{item}}:00</p>
             </div>
           </div>
-          <div class="main" v-for="(item,index) in listData" :key="index" >
-            <div v-if="current.indexOf(index)!=-1">
+          <div class="main" v-for="(item,index) in listData" :key="index"  v-show="current.indexOf(index)!=-1">
                 <div class="list-time">{{index+1}}:00</div>
                 <div class="list-cont">
                   <P>中长期持仓量</P>
@@ -49,7 +48,6 @@
                   <p>{{item.avePrice}}<span>元/MW</span></p>
                 </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -163,7 +161,7 @@ export default {
   .times .times-main .time-item.active{
     border: 0;
     background-color: #0e1a31;
-    background-image: url("../assets/image/borderBg.png");
+    background-image: url("../../../assets/image/borderBg.png");
     background-size: contain;
     background-repeat: no-repeat;
   } 
