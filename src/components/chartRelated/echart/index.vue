@@ -10,7 +10,7 @@
         </el-date-picker>
       </div>
       <div class="tab-group flex">
-          <div v-for="item in tablist" class="page-box tab-item" :key="item">
+          <div v-for="(item, index) in tablist" class="page-box tab-item" :key="index">
               <i class="fa" :class="item.i"></i>
               <span>{{item.name}}</span>
               <el-tooltip class="item" effect="dark"  placement="top">

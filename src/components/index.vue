@@ -22,14 +22,7 @@
           <el-aside class="index-menu" style="width:auto">
             <div class="menu-toggle" v-on:click="collapse1">
                 <label ref="icons" class="iconfont">
-                    <svg  version="1.1" role="presentation" width="22" height="22" viewBox="0 0 200 200" class="fa-icon" style="font-size: 1.2em;">
-                    <path d="M25,41.667h150c2.3,0,4.264,0.814,5.892,2.442c1.628,1.627,2.442,3.592,2.442,5.892
-                    s-0.814,4.264-2.442,5.892c-1.628,1.628-3.592,2.442-5.892,2.442H25c-2.3,0-4.264-0.814-5.892-2.442S16.667,52.3,16.667,50
-                    s0.814-4.264,2.442-5.892C20.736,42.48,22.7,41.667,25,41.667z M25,141.666h150c2.3,0,4.264,0.814,5.892,2.442
-                    s2.442,3.592,2.442,5.892s-0.814,4.264-2.442,5.892s-3.592,2.442-5.892,2.442H25c-2.3,0-4.264-0.814-5.892-2.442
-                    S16.667,152.3,16.667,150s0.814-4.264,2.442-5.892S22.7,141.666,25,141.666z M25,91.667h150c2.3,0,4.264,0.814,5.892,2.442
-                    s2.442,3.592,2.442,5.892s-0.814,4.264-2.442,5.892s-3.592,2.442-5.892,2.442H25c-2.3,0-4.264-0.814-5.892-2.442
-                    S16.667,102.3,16.667,100s0.814-4.264,2.442-5.892C20.736,92.48,22.7,91.667,25,91.667z" style="fill: rgb(102, 115, 156);"></path>  <!----></svg>
+                    <i class="small-icon zoom-icon" ></i>
                 </label>
             </div>
             <el-menu
@@ -74,7 +67,7 @@ export default {
         mainPath: '0',
         vicePath: '0-0',
         isCollapse: false,
-        activeIndex: '0',
+        activeIndex: '0-0',
         menuList: menuList
       };
     },
@@ -123,7 +116,7 @@ export default {
                 this.vicePath = vicePath;
                 this.activeIndex = vicePath
             }else{
-                console.log(this.activeIndex,'activeIndex')
+                // console.log(this.activeIndex,'activeIndex')
                 this.$router.push({name:"formLink"});
             }
       }
@@ -136,7 +129,26 @@ export default {
 }
 
 </script>
+<style scoped lang="scss">
+ @import '@/scss/commSvg.scss';
+</style>
 <style scoped>
+    .icon-item {
+        vertical-align: middle;
+        margin-right: 5px;
+        width: 24px;
+        text-align: center;
+        height: 22px;
+        font-size: 16px;
+    }
+    .small-icon {
+        display: inline-block;
+        width: 18px;
+        height: 21px;
+        background-size: 18px 21px;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
     ::-webkit-scrollbar{
         width: 6px;
         height: 6px;

@@ -72,7 +72,7 @@ export default {
   components:{},
   props:{},
   created(){
-      console.log(this.$route)
+    //   console.log(this.$route)
   },
   data(){
     var validAge=(rule,value,callback)=>{

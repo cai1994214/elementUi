@@ -23,7 +23,7 @@ Vue.use(common)
 
 
 Vue.filter('reverseStr',function(value,format){
-  console.log(format)
+  // console.log(format)
   return value.split('').reverse().join('')
 })
 

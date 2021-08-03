@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/myHome'
 
-import Ttable from '@/components/myTable'
+//首页
+import Home from '@/components/index.vue'
+
+
 //vue相关
 import tForm from '@/components/vueRelated/vueForm'
 import Mmenu from '@/components/vueRelated/vueMenu'
@@ -17,15 +19,19 @@ import Mechart from '@/components/chartRelated/echart'
 import timeSel from '@/components/chartRelated/timeSel'
 import screenData from '@/components/chartRelated/screenData'
 
+//表格相关
+import TableTree from '@/components/tableRelated/tableTree'
+import Ttable from '@/components/tableRelated/commTable'
 
-import NotFoundComponent from '@/components/notFound'
+//其他
+import DragonBubble from '@/components/otherRelated/dragonBubble'
+
+//404
+import NotFoundComponent from '@/components/404/notFound'
 
 
-
-import TableTree from '@/components/tableTree'
-import MousePage from '@/components/mousePage'
 // 懒加载方式，当路由被访问的时候才加载对应组件
-const Login = resolve => require(['@/components/Login'], resolve)
+const Login = resolve => require(['@/components/login/index.vue'], resolve)
  
 Vue.use(Router)
  
@@ -102,9 +108,9 @@ let router= new Router({
             component:TableTree
           },
           {
-            path:'/MousePage',
-            name:"MousePageLink",
-            component:MousePage
+            path:'/dragonBubble',
+            name:"DragonBubbleLink",
+            component:DragonBubble
           },
         ]
       },
@@ -117,7 +123,7 @@ let router= new Router({
   })
 
   router.beforeEach((to, from, next) => {
-    //NProgress.start();
+    
     if (to.path == '/login') {
       sessionStorage.removeItem('user');
     }

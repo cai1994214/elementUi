@@ -118,7 +118,7 @@
             }
         }
         this.tableColumn = columnArr;
-        console.log('columnArr',columnArr)
+        // console.log('columnArr',columnArr)
         //------start: 将时间字段为key 价格为vule的对象处理出来放在 普通对象的字段里 ------
         //1:处理表格数据  把每项时间对应的价格 和其他需要展示的字段提出来
         let tableData = newData.map((item)=>{
@@ -136,7 +136,7 @@
           })
           return arr
         });
-        console.log('tableData',tableData)
+        // console.log('tableData',tableData)
         //2:通过对象合并 处理成想要的格式
         let newtableData = tableData.map((item) => {
           let obj2 = {},arr2 = [];
@@ -152,7 +152,7 @@
           return Object.assign.apply({}, arr2);
       });
       //------end: 将时间字段为key 价格为vule的对象处理出来放在 普通对象的字段里 ------
-      console.log('newtableData',newtableData)
+      // console.log('newtableData',newtableData)
 
       //再将普通json 转化成树形 往组件里一丢 完事
       this.tableData = this.arrayTransTree(newtableData,'code','parentCode','children');

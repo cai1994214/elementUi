@@ -29,7 +29,7 @@ const vueRelated = {
 //图表相关 
 const chartRelated = {
     title: '图表相关',
-    iconClass: 'el-icon-menu',
+    iconClass: 'iconfont el-icon-home icon-item',
     children: [
         {
             title: '滑轮',
@@ -57,15 +57,15 @@ const chartRelated = {
 //表格相关 
 const tableRelated = {
     title: '表格相关',
-    iconClass: 'el-icon-menu',
+    iconClass: 'iconfont el-icon-menufold icon-item',
     children: [
         {
             title: '树表格',
             path: 'tableTreeLink',
         },
         {
-            title: '轮播',
-            path: 'wheelLink',
+            title: '普通表格',
+            path: 'tableLink'
         }
     ]
 }
@@ -73,11 +73,11 @@ const tableRelated = {
 //其他
 const otherCont = {
     title: '其他内容',
-    iconClass: 'el-icon-menu',
+    iconClass: 'iconfont el-icon-leaf icon-item',
     children: [
         {
             title: '龙气泡',
-            path: 'MousePageLink',
+            path: 'DragonBubbleLink',
         },
     ]
 }

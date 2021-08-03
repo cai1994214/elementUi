@@ -142,7 +142,7 @@ export default {
             this.multipleSelection = val;
         },
         clickThisRow(value){
-            console.log(value);
+            // console.log(value);
         },
          handleSizeChange(val){//页码大小
             this.pageSize = val;
