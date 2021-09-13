@@ -11,6 +11,7 @@ import Mmenu from '@/components/vueRelated/vueMenu'
 import Xtest from '@/components/vueRelated/vueVuex'
 import commParent from '@/components/vueRelated/vueCommunication'
 import NVuex from '@/components/vueRelated/newVuex'
+import AttrListen from '@/components/vueRelated/attrListen'
 
 //图标相关
 import Tscroll from '@/components/chartRelated/scrollDemo/scrolltest'
@@ -112,6 +113,11 @@ let router= new Router({
             name:"DragonBubbleLink",
             component:DragonBubble
           },
+          {
+            path: '/attrListen',
+            name: 'attrListenLink',
+            component: AttrListen
+          }
         ]
       },
       {

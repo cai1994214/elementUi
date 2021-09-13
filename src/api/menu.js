@@ -20,6 +20,10 @@ const vueRelated = {
             path: 'commParentLink',
         },
         {
+            title: '跨组件通信',
+            path: 'attrListenLink'
+        },
+        {
             title: '新vuex',
             path: 'NVuexLink',
         },
