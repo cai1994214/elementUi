@@ -1,40 +1,36 @@
 <template>
-  <div >
-      <div :style="{color}">
-          {{msg.id}} - {{msg.data}}
-      </div>
-  </div>
+<div class="parent">
+  父亲级别 : <strong>只用作中转</strong>
+  {{booleanFn}}
+  <son />
+</div>
 </template>
 
 <script>
-import bus from '@/api/eventbus'
+import Son from '../grandson/index.vue'
 export default {
-  name:'child',
-  components:{},
-  props:['msg'],
-  inject:['colored'],
-  data(){
-    return {
-        // colored:false
-    }
-  },
-  watch:{},
-  computed:{
-      color(){
-          return this.colored.value ? 'red' : "blue";
-      }
-  },
-  methods:{
-    //   handleClick(){
-    //     //   this.$emit('handle-change-color',this.color);
-    //       bus.$emit('change-color','我是中央通信')
-    //   }
-  },
-  created(){
-  },
-  mounted(){}
+name: 'ProvideParent',
+inject: ['nameObj', 'age', 'cityFn', 'boolean'],
+computed: {
+  booleanFn() {
+    return this.boolean()
+  }
+},
+components: { Son }
 }
 </script>
-<style  scoped>
 
+<style lang="scss" scoped>
+.parent{
+height:100px;
+line-height: 100px;
+border: 2px solid  #feafef;
+padding:0 10px;
+margin-top: 20px;
+strong{
+  font-size: 20px;
+  text-decoration: underline;;
+}
+
+}
 </style>

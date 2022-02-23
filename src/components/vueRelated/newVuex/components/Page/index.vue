@@ -24,7 +24,9 @@ export default {
     },
     watch:{},
     computed:{
-        ...mapState(['curIdx'])
+        ...mapState({
+          curIdx: (state)=>state.userData.curIdx
+        })
     },
     methods:{},
     created(){},

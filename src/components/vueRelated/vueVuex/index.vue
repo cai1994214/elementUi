@@ -1,8 +1,7 @@
 <template>
   <div class="tlc">
-    <h2>我是从页面上直接获取的:{{this.$store.state.count}}</h2>
-    <h2>我是从Getters获取计算后的值:{{this.$store.getters.getStateCount}}</h2>
-    <count :lastChild="isCollapse" :child-say='listenToMyBoy'></count>
+    <h2>我是从页面上直接获取的:{{this.$store.state.userData.count}}</h2>
+    <h2>我是从页面上直接获取的:{{this.$store.state.userData.name}}</h2>
     <p>这是子页面向父页面传的值{{childWords}}</p>
     <ul>
       <li v-for="item in listData" :key="item">{{item}}</li>
@@ -12,9 +11,7 @@
 </template>
 
 <script>
-import count from './components/count'
 export default {
-  components: {count},
   props:['isCollapse'],
   data() {
     return {

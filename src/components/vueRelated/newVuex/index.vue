@@ -1,6 +1,6 @@
 <template>
   <div>
-      <Tab></Tab>
+      <Tab :curIdx="1"></Tab>
       <Page></Page>
 
     <PartOne/>

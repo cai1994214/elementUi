@@ -16,8 +16,8 @@ export default {
     },
     watch:{},
     computed:{
-        ...mapState('counter1',{
-            count: (state)=>state.count
+        ...mapState({
+            count: (state)=>state.counter1.count
         })
     },
     methods:{

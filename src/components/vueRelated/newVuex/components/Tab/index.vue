@@ -1,23 +1,23 @@
 <template>
   <div>
       <a href="javascript:;"
-        :class="[ { current : curIdx === 0} ]"
-        @click="changeTab(0,'选项1')"
+        :class="[ { current : curIdx === 1} ]"
+        @click="changeTab(1,'选项1')"
       >选项1</a>
       <a href="javascript:;"
-        :class="[ { current : curIdx === 1} ]"
-        @click="changeTab(1,'选项2')"
+        :class="[ { current : curIdx === 2} ]"
+        @click="changeTab(2,'选项2')"
       >选项2</a>
       <a href="javascript:;"
-        :class="[ { current : curIdx === 2} ]"
-        @click="changeTab(2,'选项3')"
+        :class="[ { current : curIdx === 3} ]"
+        @click="changeTab(3,'选项3')"
       >选项3</a>
       <a href="javascript:;"
-        :class="[ { current : curIdx === 3} ]"
-        @click="changeTab(3,'选项4')"
+        :class="[ { current : curIdx === 4} ]"
+        @click="changeTab(4,'选项4')"
       >选项4</a>
 
-
+      <span>stote的值{{count}}</span>
       <input type="text" v-model="price">
       <h4>{{price | reverseStr(12) | toUpperCaseStr}}</h4>
   </div>
@@ -28,29 +28,33 @@ import {mapState,mapMutations} from 'vuex'
 export default {
   name:'Tab',
   components:{},
-//   props:{
-//       curIdx:Number
-//   },
+  props:{
+  },
   data(){
     return {
-      price:'asdad'
+      price:'asdad',
+       curIdx: 1
     }
   },
-  watch:{},
+  watch:{
+  },
   computed:{
-      ...mapState(['curIdx'])
+      ...mapState({
+         count: (state)=>state.userData.count
+      })
   },
   methods:{
-    //   ...mapMutations(['getName']),
+      ...mapMutations('userData',{
+        setCount: "setCount"
+      }),
       changeTab(index,text){
-        //   this.$emit('changeTab',index);
-        this.$store.commit('setCurIdx',{
-            index,
-            text
-        })
+        this.curIdx = index;
+       this.setCount(index+1);
       }
   },
-  created(){},
+  created(){
+
+  },
   mounted(){}
 }
 </script>
