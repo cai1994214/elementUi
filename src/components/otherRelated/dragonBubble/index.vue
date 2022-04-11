@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script>
+<script type="text/jsx">
 import { Mixins } from "./common";
 const dragonImage = require("./dragon.jpg");
 const bubbleImage = require("./bubble.png");
@@ -76,7 +76,20 @@ export default {
       };
     },
   },
-  created() {},
+  created() {
+    console.log()
+    this.$msgbox({
+       title: '消息',
+      dangerouslyUseHTMLString: true,
+       message: (()=>(
+         <div>
+           <p>欢迎来到鼠标点击页面</p>
+           <p>请点击鼠标左键</p>
+            <el-button type="success">成功按钮</el-button>
+         </div>
+       ))(),
+    });
+  },
   mounted() {
     this.drawDragonImageInCanvas();
   },

@@ -49,7 +49,7 @@ let router= new Router({
         component:NotFoundComponent
       }
   ],
-  mode:'history'
+  mode:'hash'
   })
 
   router.beforeEach((to, from, next) => {

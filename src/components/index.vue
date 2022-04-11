@@ -26,8 +26,8 @@
                 </label>
             </div>
             <el-menu
-            router 
-            :default-active="activeIndex" 
+            router
+            :default-active="activeIndex"
             class="el-menu-vertical-demo"
             @select="pathName"
             :collapse="isCollapse"
@@ -37,8 +37,8 @@
                     <i :class="item.iconClass"></i>
                     <span slot="title">{{item.title}}</span>
                 </template>
-                <el-menu-item  v-for="(child, j) in item.children" 
-                :key="`${i}-${j}`" 
+                <el-menu-item  v-for="(child, j) in item.children"
+                :key="`${i}-${j}`"
                 :index="`${i}-${j}`"
                 :route="{name: child && child.path}"
                 >{{child.title}}</el-menu-item>
@@ -99,12 +99,12 @@ export default {
            this.$refs.lmenu.style.left="60px";
            this.$refs.hline.style.width="calc(100% - 1075px)";
            this.$refs.icons.style.transform="rotate(90deg) scale(.8)"
-           
+
         }
       },
       pathName(key,keyPath){
-          sessionStorage.setItem("mainPath", keyPath[0]); 
-          sessionStorage.setItem("vicePath", keyPath[1]); 
+          sessionStorage.setItem("mainPath", keyPath[0]);
+          sessionStorage.setItem("vicePath", keyPath[1]);
           this.mainPath=keyPath[0];
           this.vicePath=keyPath[1];
       },
@@ -238,9 +238,9 @@ export default {
         overflow-y: scroll;
         padding-top: 20px;
     }
-    .iconfont{  
+    .iconfont{
         display: inline-block;
-        padding-top:4px; 
+        padding-top:4px;
         -webkit-transition: all 0.45s;
         transition: all 0.45s;
     }
@@ -284,7 +284,7 @@ export default {
         width: 100%;
         line-height: 45px;
         text-align: center;
-        transition: all .35s; 
+        transition: all .35s;
         background:rgb(36,41,57);
     }
     .right-main{
@@ -292,7 +292,7 @@ export default {
         position: relative;
         overflow: auto;
         flex:1;
-        background-color:#000d20 !important; 
+        background-color:#000d20 !important;
         flex-basis: auto;
     }
     .right-main span{
