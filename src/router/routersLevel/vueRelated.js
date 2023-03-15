@@ -1,10 +1,10 @@
 //vue相关
-const tForm = () => import( '@/components/vueRelated/vueForm');
-const Mmenu = () => import( '@/components/vueRelated/vueMenu');
-const Xtest = () => import( '@/components/vueRelated/vueVuex');
-const commParent = () => import( '@/components/vueRelated/vueCommunication');
-const NVuex = () => import( '@/components/vueRelated/newVuex');
-const AttrListen = () => import( '@/components/vueRelated/attrListen');
+const tForm = () => import('@/components/vueRelated/vueForm');
+const Mmenu = () => import('@/components/vueRelated/vueMenu');
+const Xtest = () => import('@/components/vueRelated/vueVuex');
+const commParent = () => import('@/components/vueRelated/vueCommunication');
+const NVuex = () => import('@/components/vueRelated/newVuex');
+const AttrListen = () => import('@/components/vueRelated/attrListen');
 
 export default [
   {
@@ -28,9 +28,9 @@ export default [
     component: commParent
   },
   {
-    path:'/NVuex',
-    name:'NVuexLink',
-    component:NVuex
+    path: '/NVuex',
+    name: 'NVuexLink',
+    component: NVuex
   },
   {
     path: '/attrListen',

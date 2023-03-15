@@ -23,10 +23,10 @@
         @sortChange="sortChange"
         :loading="loading"
         >
-          <template v-slot:sku="{data, index, rowData}">
+          <template v-slot:sku="{data}">
            {{data}}
           </template>
-          <template v-slot:productPositionHeader="{data, index, rowData}">  <!-- 产品定位表头 -->
+          <template v-slot:productPositionHeader="{}">  <!-- 产品定位表头 -->
             <span>产品定位</span>
              <el-tooltip effect="light" placement="right" >
                 <span class="el-icon-question helpTips" style="cursor:pointer;"></span>
@@ -35,7 +35,7 @@
                 </div>
             </el-tooltip>
           </template>
-          <template v-slot:productPosition="{data, index, rowData}"> <!-- 产品定位 -->
+          <template v-slot:productPosition="{data}"> <!-- 产品定位 -->
               <span>{{data}}</span>
           </template>
           <template v-slot:productLine="{data, index, rowData}"> <!-- 产品线 -->
@@ -62,7 +62,7 @@
                 <span>{{data}}</span>
               </p>
           </template>
-          <template v-slot:operate="{data, index, rowData}"><!-- 操作 -->
+          <template v-slot:operate="{index, rowData}"><!-- 操作 -->
             <div class="btn-edit">
               <el-button type="default" size="mini" v-show="!rowData.rowEditFlag" @click="handleEditRow(index, rowData)">编辑</el-button>
              <div v-show="rowData.rowEditFlag">
@@ -135,16 +135,16 @@ export default {
         { prop: "sku", label: "SKU", slotName: "sku" },
         { prop: 'skuProductList',label: 'sku信息', minWidth: 200, childrenList: skuProductColumn},
         { prop: "shop", label: "店铺" , },
-        { prop: "country", label: "国家" , },
-        { prop: "productLine", label: "品线" , width: 150, slotName: 'productLine'},
-        { prop: "productPosition", label: "产品定位" ,slotName: 'productPosition', width: 150},
-        { prop: "asin", label: "ASIN" , },
-        { prop: "fnsku", label: "FNSKU" , },
-        { prop: "planState", label: "透明计划状态" , width: 150},
-        { prop: "salesUrl", label: "销售链接" , slotName: 'salesUrl', width: 150},
-        { prop: "upc", label: "UPC" , width: 150, countLimit: 25},
-        { prop: "innerGTIN", label: "内箱GTIN" , slotName: 'innerGTIN', width: 150 , sortBy: 'innerGTIN'},
-        { prop: "outerGTIN", label: "外箱GTIN" , slotName: 'outerGTIN', width: 150, sortBy: 'outerGTIN', columnFlag: true},
+        // { prop: "country", label: "国家" , },
+        // { prop: "productLine", label: "品线" , width: 150, slotName: 'productLine'},
+        // { prop: "productPosition", label: "产品定位" ,slotName: 'productPosition', width: 150},
+        // { prop: "asin", label: "ASIN" , },
+        // { prop: "fnsku", label: "FNSKU" , },
+        // { prop: "planState", label: "透明计划状态" , width: 150},
+        // { prop: "salesUrl", label: "销售链接" , slotName: 'salesUrl', width: 150},
+        // { prop: "upc", label: "UPC" , width: 150, countLimit: 25},
+        // { prop: "innerGTIN", label: "内箱GTIN" , slotName: 'innerGTIN', width: 150 , sortBy: 'innerGTIN'},
+        // { prop: "outerGTIN", label: "外箱GTIN" , slotName: 'outerGTIN', width: 150, sortBy: 'outerGTIN', columnFlag: true},
         { prop: '', label: '操作', slotName: 'operate', width: 180, fixed: 'right'}
       ],
       tipTableData: [

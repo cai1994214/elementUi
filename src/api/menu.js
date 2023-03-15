@@ -83,6 +83,10 @@ const otherCont = {
             title: '龙气泡',
             path: 'DragonBubbleLink',
         },
+        {
+            title: '流程图',
+            path: 'SuperFlowLink',
+        },
     ]
 }
 

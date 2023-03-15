@@ -1,6 +1,6 @@
 // 表格相关
-const TableTree = () => import( '@/components/tableRelated/tableTree');
-const Ttable = () => import( '@/components/tableRelated/commTable');
+const TableTree = () => import('@/components/tableRelated/tableTree');
+const Ttable = () => import('@/components/tableRelated/commTable');
 
 
 export default [
@@ -10,8 +10,8 @@ export default [
     component: Ttable
   },
   {
-    path:'/tableTree',
-    name:"tableTreeLink",
-    component:TableTree
+    path: '/tableTree',
+    name: "tableTreeLink",
+    component: TableTree
   },
 ]
